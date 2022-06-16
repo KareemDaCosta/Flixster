@@ -116,3 +116,45 @@ body {
     min-width: 196px;
   }
 }
+
+#submit {
+    width: 90px;
+    height: 30px;
+    cursor: pointer;
+    background: #91C9FF;
+    border: 1px solid #3A81FC;
+    outline: none;
+    transition: 1s ease-in-out;
+  }
+  
+  #submit:hover {
+    transition: 1s ease-in-out;
+    background: #3A81FC;
+  }
+  
+  #submit span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }
+
+  #clear {
+    width: 90px;
+    height: 30px;
+    cursor: pointer;
+    background: #FF8178;
+    border: 1px solid #E861D8;
+    outline: none;
+    transition: 1s ease-in-out;
+  }
+  
+  #clear:hover {
+    transition: 1s ease-in-out;
+    background: #E861D8;
+  }
+  
+  #clear span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }

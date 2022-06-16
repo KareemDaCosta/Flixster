@@ -17,12 +17,14 @@ const movieGridElement = document.querySelector(".movies-grid");
 const moviesLoaded = document.querySelector("#movies-loaded");
 const loadMoreButton = document.querySelector("#load-more-movies-btn");
 const searchBar = document.querySelector("#search-input");
+
+const submitButton = document.querySelector("#submit");
+const clearButton = document.querySelector("#clear");
+
 var numMovies = 0;
 
 async function loadMovies(movieGridElement, results) {
-    console.log('results: ', results);
     var data = results["results"];
-    console.log('data: ', data);
     for(var i = 0; i < data.length; i++) {
         var movie = data[i];
         movieGridElement.innerHTML +=
@@ -39,9 +41,7 @@ async function loadMovies(movieGridElement, results) {
 async function fetchMovies(movieGridElement) {
     try {
         const response = await fetch(basePopularRequest + apiKey + basePopularEnd + page);
-        console.log('basePopularRequest + apiKey + basePopularEnd + page: ', basePopularRequest + apiKey + basePopularEnd + page);
         const results = await response.json();
-        console.log('results: ', results);
         page++;
         loadMovies(movieGridElement, results);
     }
@@ -57,11 +57,9 @@ function resetValues() {
 }
 
 async function filterMovies(movieGridElement, str) {
-    console.log(str);
     searchMode = true;
     try {
         const response = await fetch(searchFirst + apiKey + searchSecond + str + searchThird + page + searchFourth);
-        console.log('searchFirst + apiKey + searchSecond + str + searchThird + page + searchFourth: ', searchFirst + apiKey + searchSecond + str + searchThird + page + searchFourth);
         const results = await response.json();
         page++;
         loadMovies(movieGridElement, results);
@@ -71,7 +69,7 @@ async function filterMovies(movieGridElement, str) {
     }
 }
 
-function addEventListeners(loadMoreButton, searchBar, movieGridElement) {
+function addEventListeners(loadMoreButton, searchBar, movieGridElement, submitButton, clearButton) {
     loadMoreButton.addEventListener("click", function () {
         if(!searchMode) fetchMovies(movieGridElement); 
         else  {
@@ -79,12 +77,42 @@ function addEventListeners(loadMoreButton, searchBar, movieGridElement) {
         }
     }, false);
     searchBar.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        searchStr = document.querySelector("#search-input").value;
+        if (event.keyCode === 13) {
+            if (document.querySelector("#search-input").value == "") {
+                resetValues();
+                searchMode = false;
+                fetchMovies(movieGridElement);
+            }
+            else {
+                searchMode = true;
+                searchStr = document.querySelector("#search-input").value;
+                resetValues();
+                filterMovies(movieGridElement, searchStr);
+            }
+        }
+    });
+    submitButton.addEventListener("mouseup", function() {
+
+        if (document.querySelector("#search-input").value == "") {
+            resetValues();
+            console.log("hi");
+            searchMode = false;
+            fetchMovies(movieGridElement);
+        }
+        else {
+            console.log("hello");
+            searchMode = true;
+            searchStr = document.querySelector("#search-input").value;
+            resetValues();
+            filterMovies(movieGridElement, searchStr);
+        }
+    });
+    clearButton.addEventListener("mouseup", function() {
+        document.querySelector("#search-input").value = "";
         resetValues();
-        filterMovies(movieGridElement, searchStr);
-    }
-});
+        searchMode = false;
+        fetchMovies(movieGridElement);
+    });
 }
 
 
@@ -92,6 +120,6 @@ function addEventListeners(loadMoreButton, searchBar, movieGridElement) {
 window.onload = function () {
     // execute your functions here to make sure they run as soon as the page loads
     //loadMoreMovies(movieGridElement, movies, moviesLoadedPerClick);
-    addEventListeners(loadMoreButton, searchBar, movieGridElement);
+    addEventListeners(loadMoreButton, searchBar, movieGridElement, submitButton, clearButton);
     fetchMovies(movieGridElement);
   }
