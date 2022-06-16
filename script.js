@@ -120,7 +120,7 @@ const moviesLoadedPerClick = 5;
 
 function loadMovie(movieGridElement, movie) {
     movieGridElement.innerHTML +=
-    `<div id="movie-card">
+    `<div class="movie-card">
         <img class="movie-poster" src="${imageBaseUrl}/w342${movie.posterPath}" alt="${movie.title}" title="${movie.title}"/>
         <div class="movie-title">${movie.title}</div>
         <div class="movie-votes">Votes: ${movie.voteAverage}</div>

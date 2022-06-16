@@ -20,7 +20,7 @@ body {
     grid-template-columns: repeat(5, 1fr);;
     grid-template-rows: 1fr;
     grid-gap: 10px;
-    font-size: 18px
+    font-size: 22px
 }
 
 .movie-poster {
@@ -41,6 +41,28 @@ body {
     justify-content: center;
     align-self: center;
     max-height: 30px;
+}
+.movie-card {
+    align-items: center;
+    justify-items: center;
+    position: relative;
+    transform: scale(1);
+    transition: transform 800ms ease-out;
+    z-index: 0;
+}
+
+.movie-card:hover{
+    z-index: 10;
+    cursor: pointer;
+    transform: scale(1.15);
+    transform-origin: center;
+    transition: all 500ms cubic-bezier(0.57, 0.21, 0.69, 3.25);
+}
+
+.movie-card:hover .movie-title, .movie-card:hover .movie-votes {
+    transform: scale(.87);
+    transform-origin: center;
+    transition: all 500ms cubic-bezier(0.57, 0.21, 0.69, 3.25);
 }
 
 
