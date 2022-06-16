@@ -1,20 +1,46 @@
 :root {
     background: linear-gradient(to right, #9966CC, black);
-    color: #B31033;
+    color: #ADD8E6;
 }
 
 * {
     font-family: 'MedievalSharp', cursive;
 }
 
-@font-face {
-    font-family: 'Demoness';
-    src: url('./fonts/Demoness.woff2') format('woff2'),
-         url('./fonts/Demoness.woff') format('woff'),
-         url('./fonts/Demoness.ttf') format('truetype');
-  }
 
 h1, h2{
     color: white;
 }
+/* 
+body {
+    max-width: 100%
+} */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+    font-size: 18px
+}
+
+.movie-poster {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.bar {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-flow: row wrap;
+}
+
+.search-div {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-self: center;
+    max-height: 30px;
+}
+
 

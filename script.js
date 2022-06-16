@@ -119,11 +119,12 @@ let numMovies = 0;
 const moviesLoadedPerClick = 5;
 
 function loadMovie(movieGridElement, movie) {
-    movieGridElement.innerHTML += '<div id="movie-card"></div>'
-    movieGridElement.innerHTML += `<div class="movie-title">${movie.title}</div>`;
-    movieGridElement.innerHTML += `<img class="movie-poster" src="${imageBaseUrl}/w342${movie.posterPath}" alt="${movie.title}" title="${movie.title}"/>`;
-    movieGridElement.innerHTML += `<div class="movie-votes">Votes: ${movie.voteAverage}</div>`;
-    movieGridElement.innerHTML += "</div>"
+    movieGridElement.innerHTML +=
+    `<div id="movie-card">
+        <img class="movie-poster" src="${imageBaseUrl}/w342${movie.posterPath}" alt="${movie.title}" title="${movie.title}"/>
+        <div class="movie-title">${movie.title}</div>
+        <div class="movie-votes">Votes: ${movie.voteAverage}</div>
+    </div>`
     console.log('movieGridElement: ', movieGridElement);
 }
 
@@ -133,7 +134,7 @@ function loadMoreMovies(movieGridElement, movies, numIncrease) {
         loadMovie(movieGridElement, movies[numMovies]);
         numMovies++;
     }
-    moviesLoaded.innerHTML = `${numMovies} Movies Loaded`;
+    moviesLoaded.innerHTML = `<h3>${numMovies} Movies Loaded</h3>`;
 }
 
 function filterMovies(str) {
@@ -144,8 +145,11 @@ function filterMovies(str) {
 
 function addEventListeners(loadMoreButton, searchBar) {
     loadMoreButton.addEventListener("click", function(event) {loadMoreMovies(movieGridElement, movies, moviesLoadedPerClick); }, false);
-    searchBar.addEventListener('keyup', function(event) {filterMovies(event)}, false);
-
+    searchBar.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        alert('Enter is pressed!');
+    }
+});
 }
 
 
