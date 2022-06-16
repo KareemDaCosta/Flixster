@@ -19,7 +19,7 @@ const loadMoreButton = document.querySelector("#load-more-movies-btn");
 const searchBar = document.querySelector("#search-input");
 
 const submitButton = document.querySelector("#submit");
-const clearButton = document.querySelector("#clear");
+const clearButton = document.querySelector("#close-search-button");
 
 var numMovies = 0;
 
