@@ -42,9 +42,7 @@ Deployed Application (optional): [Flixster Deployed Site](https://kareemdacosta.
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+<iframe width="1036" height="671" src="https://www.youtube.com/embed/gsfpMjaX34w" title="Flixster Recording" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Reflection
 
