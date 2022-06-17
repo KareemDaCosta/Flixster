@@ -4,7 +4,7 @@
 
 Submitted by: **Kareem DaCosta**
 
-Estimated time spent: **#** hours spent in total
+Estimated time spent: **10** hours spent in total
 
 Deployed Application (optional): [Flixster Deployed Site](https://kareemdacosta.github.io/Flixster/)
 
