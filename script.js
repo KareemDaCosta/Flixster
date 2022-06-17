@@ -152,7 +152,9 @@ async function getVideoKey(popup, index) {
                     </div>`;
         }
         else {
-            video = "<img src='./penguinhide.gif' class='video'>";
+            video = `<div class="video-div">
+            <img src='./penguinhide.gif' class='video'>
+            </div>`;
         }
         const image = `<img src="${posterURL}" class="movie-backdrop" >`;
 
