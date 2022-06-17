@@ -42,7 +42,7 @@ Deployed Application (optional): [Flixster Deployed Site](https://kareemdacosta.
 
 ### Walkthrough Video
 
-<iframe width="1036" height="671" src="https://www.youtube.com/embed/gsfpMjaX34w" title="Flixster Recording" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Walkthrough Video](https://youtu.be/gsfpMjaX34w)
 
 ### Reflection
 
