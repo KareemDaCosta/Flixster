@@ -48,20 +48,20 @@ Deployed Application (optional): [Flixster Deployed Site](https://kareemdacosta.
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+Once I finished the weekly assignments they definitely helped with the project (especially the API walkthrough), but I felt that the second lab (report card) threw a lot of concepts very quickly. I was able to finish it and complete the stretch goals, but it was definitely challenging and took me a long time to figure out (I had to work after work hours in the evening to solidify the concepts).
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+Most of the website works as well as I would like. If I had more time I would maybe give a random list movie feature where I would query 20 movies all from random pages of the API. I feel like that would be fun and would expose people to new movies they've never heard of.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+I think the project in whole went very well. I was able to finish the core requirements and the stretch goals, and as this was my first website I've ever made (other than the labs), I am very happy both with the interactivity and responsiveness of the site. The popup is also responsive, switching between css grid and flexbox as the screen gets narrower through media queries. I also noticed that the videos I was getting from the site weren't always trailers, they were any video related to the movie, so I looped through the list of videos to find one that had "trailer" or "Trailer" in the title, and if I didn't find anything, then I would just return the first video. After implementing that I noticed that the videos became a lot more relevant and were almost always trailers. Finally, I also implemented a little gif if you click on a movie that doesn't have any videos (try and spot it)!
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+None
 
 ### Shout out
 
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+Isa and I worked together to figure out how to embed videos into our popups, so shout out to her!
