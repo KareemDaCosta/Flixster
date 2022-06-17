@@ -23,14 +23,17 @@ const clearButton = document.querySelector("#close-search-button");
 
 var numMovies = 0;
 
+var arr = [];
+
 async function loadMovies(movieGridElement, results) {
     var data = results["results"];
+    arr = arr.concat(data);
     console.log('data: ', data);
     for(var i = 0; i < data.length; i++) {
         var movie = data[i];
         movieGridElement.innerHTML +=
         `<div class="movie-card" >
-            <img onclick="openNav(${data[i]["id"]})" class="movie-poster" src="${imageBaseUrl}/w342${movie.poster_path}" alt="${movie.title}" title="${movie.title}"/>
+            <img onclick="openNav(${i})" class="movie-poster" src="${imageBaseUrl}/w342${movie.poster_path}" alt="${movie.title}" title="${movie.title}"/>
             <div class="movie-title">${movie.title}</div>
             <div class="movie-votes">Votes: ${movie.vote_average}</div>
         </div>`;
@@ -54,6 +57,7 @@ async function fetchMovies(movieGridElement) {
 function resetValues() {
     numMovies = 0;
     page = 1;
+    arr = [];
     movieGridElement.innerHTML = "";
 }
 
@@ -116,32 +120,45 @@ function addEventListeners(loadMoreButton, searchBar, movieGridElement, submitBu
     });
 }
 
-async function getVideoKey(popup, id) {
-    const url = `http://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`;
+async function getVideoKey(popup, index) {
+    const json = arr[index];
+    const id = json["id"];
+    const posterPath = json["backdrop_path"];
+    const videoURL = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`;
+    const posterURL = `https://image.tmdb.org/t/p/original${posterPath}`;
+    console.log('posterURL: ', posterURL);
     try {
-        const response = await fetch(url);
-        const result = await response.json();
-        const data = result["results"];
-        console.log('data: ', data);
-        if(!data.length == 0) {
+        const response = await fetch(videoURL);
+        console.log('response: ', response);
+        const vid_result = await response.json();
+        const vid_data = vid_result["results"];
+        console.log('data: ', vid_data);
+        var video;
+        if(!vid_data.length == 0) {
             var found = true;
             var key;
-            for(var i = 0; i < data.length; i++) {
-                if(data[i]["name"].includes("Trailer") || data[i]["name"].includes("trailer")) {
-                    key = data[i]["key"];
+            for(var i = 0; i < vid_data.length; i++) {
+                if(vid_data[i]["name"].includes("Trailer") || vid_data[i]["name"].includes("trailer")) {
+                    key = vid_data[i]["key"];
                     found = true;
                     break;
                 }
             }
             if(!found) {
-                key = data[i]["key"];
+                key = vid_data[i]["key"];
             }
-
-            popup.innerHTML = `<iframe src="https://www.youtube.com/embed/${key}" class = "video" frameborder="0" allowfullscreen></iframe>`;
+            video = `<div class="video-div">
+                    <iframe src="https://www.youtube.com/embed/${key}" class="video" frameborder="0" allowfullscreen></iframe>
+                    </div>`;
         }
         else {
-            popup.innerHTML = "<img src='./penguinhide.gif' class='video'>";
+            video = "<img src='./penguinhide.gif' class='video'>";
         }
+        const image = `<img src="${posterURL}" class="movie-backdrop" >`;
+
+        const description = `<div class="movie-description"> ${json["overview"]} </div>`;
+
+        popup.innerHTML =  image + video + description;
     }
     catch (error) {
         console.log(error);
@@ -149,10 +166,10 @@ async function getVideoKey(popup, id) {
 }
 
 /* Open */
-function openNav(id) {
+function openNav(index) {
     document.getElementById("myNav").style.height = "100%";
     const popup = document.querySelector(".overlay-content");
-    getVideoKey(popup, id);
+    getVideoKey(popup, index);
   }
   
   /* Close */
