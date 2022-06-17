@@ -25,11 +25,12 @@ var numMovies = 0;
 
 async function loadMovies(movieGridElement, results) {
     var data = results["results"];
+    console.log('data: ', data);
     for(var i = 0; i < data.length; i++) {
         var movie = data[i];
         movieGridElement.innerHTML +=
-        `<div class="movie-card">
-            <img class="movie-poster" src="${imageBaseUrl}/w342${movie.poster_path}" alt="${movie.title}" title="${movie.title}"/>
+        `<div class="movie-card" >
+            <img onclick="openNav(${data[i]["id"]})" class="movie-poster" src="${imageBaseUrl}/w342${movie.poster_path}" alt="${movie.title}" title="${movie.title}"/>
             <div class="movie-title">${movie.title}</div>
             <div class="movie-votes">Votes: ${movie.vote_average}</div>
         </div>`;
@@ -114,6 +115,50 @@ function addEventListeners(loadMoreButton, searchBar, movieGridElement, submitBu
         fetchMovies(movieGridElement);
     });
 }
+
+async function getVideoKey(popup, id) {
+    const url = `http://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const result = await response.json();
+        const data = result["results"];
+        console.log('data: ', data);
+        if(!data.length == 0) {
+            var found = true;
+            var key;
+            for(var i = 0; i < data.length; i++) {
+                if(data[i]["name"].includes("Trailer") || data[i]["name"].includes("trailer")) {
+                    key = data[i]["key"];
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                key = data[i]["key"];
+            }
+
+            popup.innerHTML = `<iframe src="https://www.youtube.com/embed/${key}" class = "video" frameborder="0" allowfullscreen></iframe>`;
+        }
+        else {
+            popup.innerHTML = "<img src='./penguinhide.gif' class='video'>";
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+/* Open */
+function openNav(id) {
+    document.getElementById("myNav").style.height = "100%";
+    const popup = document.querySelector(".overlay-content");
+    getVideoKey(popup, id);
+  }
+  
+  /* Close */
+  function closeNav() {
+    document.getElementById("myNav").style.height = "0%";
+  }
 
 
 
